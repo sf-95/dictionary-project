@@ -13,22 +13,23 @@ export default function Dictionary(props) {
   }
 
   function search() {
-    // documentation: https://dictionaryapi.dev/
-    let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en/${keyword}`;
+    // documentation: https://dictionaryapi.dev/e
+    let apiUrl = `https://api.dictionaryapi.dev/api/v2/entries/en_US/${keyword}`;
     axios.get(apiUrl).then(handleResponse);
   }
-}
 
-function handleSubmit(event) {
-  event.preventDefault();
-  search();
+  function handleSubmit(event) {
+    event.preventDefault();
+    search();
+  }
 
   function handleKeywordChange(event) {
     setKeyword(event.target.value);
   }
 
-  function loaded() {
+  function load() {
     setLoaded(true);
+    search();
   }
 
   if (loaded) {
@@ -51,7 +52,7 @@ function handleSubmit(event) {
       </div>
     );
   } else {
-    loaded();
+    load();
     return "Loading";
   }
 }
